@@ -2,14 +2,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-<<<<<<< Updated upstream
 
-void setup() {
-    
-}
-
-void loop() {
-=======
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
@@ -66,5 +59,5 @@ void loop() {
 
     volume = 0;
   }
->>>>>>> Stashed changes
+
 }
