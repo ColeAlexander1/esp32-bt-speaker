@@ -14,6 +14,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 void setup() {
     Serial.begin(115200);
+    Wire.begin(21, 19);
      // Start OLED - Check OLED Is Wired Correctly
 if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
 {
