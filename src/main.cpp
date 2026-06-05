@@ -1,10 +1,32 @@
-#include "Arduino.h"                      // Core Arduino API
-#include "BluetoothA2DPSink.h"            // ESP32 A2DP sink library
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "oled_utility.h"
+#include "Arduino.h"
+#include "BluetoothA2DPSink.h"
 
-BluetoothA2DPSink a2dp_sink;              // Bluetooth audio receiver object
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+BluetoothA2DPSink a2dp_sink;              
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 void setup() {
-    Serial.begin(115200);                   // start serial output for debug messages
+    Serial.begin(115200);
+     // Start OLED - Check OLED Is Wired Correctly
+if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
+{
+    Serial.println("OLED not found");
+    while (true);
+}
+    display.clearDisplay(); 
+
+    DrawCenteredText(display, "Booting Speaker", 1, 30);
+    DrawVolumeBar(display, 75);
+    
+    display.display();
+
     Serial.println("Booting Bluetooth Speaker...");
 
     i2s_pin_config_t pin_config;            // specify which pins the I2S peripheral uses
@@ -30,8 +52,10 @@ void setup() {
     a2dp_sink.start("ESP32_Speaker");          // start Bluetooth A2DP sink with this name
 
     Serial.println("Ready. Pair with: ESP32_Speaker");
+
 }
 
 void loop() {
-    // no code needed here; Bluetooth audio runs in background
+
+
 }
